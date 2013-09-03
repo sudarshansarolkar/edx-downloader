@@ -118,7 +118,8 @@ if __name__ == '__main__':
         'X-CSRFToken': get_initial_token(),
     }
 
-    logging.debug('Preparing login information.')
+    logging.debug('Sending login request.')
+    # Login
     post_data = urllib.urlencode({'email': user_email,
                                  'password': user_pswd,
                                  'remember': False}).encode('utf-8')
