@@ -42,12 +42,15 @@ def get_initial_token():
     cj = cookielib.CookieJar()
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
     urllib2.install_opener(opener)
+    logging.debug('Making initial connection to get CSRF token.')
     opener.open(EDX_HOMEPAGE)
 
     for cookie in cj:
         if cookie.name == 'csrftoken':
+            logging.debug('Found CSRF token.')
             return cookie.value
 
+    logging.warn('CSRF token not found!')
     return ''
 
 
