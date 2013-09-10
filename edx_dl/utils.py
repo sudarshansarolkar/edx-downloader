@@ -51,6 +51,10 @@ def get_initial_token():
             logging.debug('Found %s cookie.', cookie.name)
             result[cookie.name] = cookie.value
 
+    if len(result) != 2:
+        logging.warn('Not all cookies found!')
+    else:
+        logging.warn('All cookies found!')
 
     return result
 
