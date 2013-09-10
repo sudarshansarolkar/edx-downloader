@@ -109,13 +109,14 @@ if __name__ == '__main__':
     video_fmt = args.format
 
     logging.debug('Preparing headers.')
+    initial_tokens = get_initial_token()
     headers = {
         'User-Agent': 'edX-downloader/0.01',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
         'Referer': EDX_HOMEPAGE,
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': get_initial_token(),
+        'X-CSRFToken': initial_tokens['csrftoken'],
     }
 
     logging.debug('Sending login request.')

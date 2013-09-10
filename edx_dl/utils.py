@@ -45,13 +45,14 @@ def get_initial_token():
     logging.debug('Making initial connection to get CSRF token.')
     opener.open(EDX_HOMEPAGE)
 
+    result = {}
     for cookie in cj:
-        if cookie.name == 'csrftoken':
-            logging.debug('Found CSRF token.')
-            return cookie.value
+        if cookie.name in ['csrftoken', 'sessionid']:
+            logging.debug('Found %s cookie.', cookie.name)
+            result[cookie.name] = cookie.value
 
-    logging.warn('CSRF token not found!')
-    return ''
+
+    return result
 
 
 def get_course_list(headers):
